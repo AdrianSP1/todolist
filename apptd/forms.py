@@ -3,5 +3,5 @@ from .models import Tarea
 class TareaForm(forms.ModelForm):
 
     class Meta:
-        model=Tarea
-        fields= ['tarea']
+        model = Tarea
+        fields = ['tarea']

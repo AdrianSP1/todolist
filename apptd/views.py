@@ -1,4 +1,4 @@
-from django.shortcuts import redirect,redirect, render
+from django.shortcuts import render,redirect
 from .models import Tarea
 from .forms import TareaForm
 
@@ -11,10 +11,11 @@ def home(request):
 def agregar(request):
     if request.method =="POST":
         form=TareaForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect('home')
     else:
         form = TareaForm()
-        context={}
-        return render(request,'apptd/agregar.html',context)
+
+    context={'form':form}
+    return render(request,'apptd/agregar.html',context)
