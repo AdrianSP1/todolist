@@ -19,3 +19,23 @@ def agregar(request):
 
     context={'form':form}
     return render(request,'apptd/agregar.html',context)
+
+
+def eliminar(request, tarea_id):
+    tarea= Tarea.objects.get(id=tarea_id)
+    tarea.delete()
+    return redirect('home')
+
+def editar(request, tarea_id):
+    tarea= Tarea.objects.get(id=tarea_id)
+    if request.method=="POST":
+        form= TareaForm(request.POST, instance=tarea)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    else:
+        form=TareaForm(instance=tarea)
+
+    context={"form":form}
+    return render(request,"apptd/editar.html",context) 
